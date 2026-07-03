@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cartoon Logo Database</title>
+
+  <style>
+@font-face {
+    font-family: 'IBMDOS';
+
+    src: url('FONTS/IBM_DOS_ISO8.woff2') format('woff2');
+
+    font-weight: normal;
+    font-style: normal;
+}
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #03001e;
+      font-family: 'IBMDOS', monospace;
+      color: #39FF88;
+      overflow-x: hidden;
+    }
+
+    /* Animated 80s Grid Background */
+    .grid-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      perspective: 500px;
+      z-index: -1;
+      overflow: hidden;
+
+      background: url("IMAGES/starfield.png") center center / cover no-repeat;
+    }
+
+    .grid {
+
+  position: absolute;
+
+  bottom: -250px;
+
+  left: -50%;
+
+  width: 200%;
+
+  height: 200%;
+
+      background-image:
+        linear-gradient(to right, #39ff88 2px, transparent 2px),
+        linear-gradient(to bottom, #39ff88 2px, transparent 2px);
+      background-size: 60px 60px;
+      transform: rotateX(60deg);
+      animation: gridMove 10s linear infinite;
+    }
+
+    @keyframes gridMove {
+  0% {
+    transform: rotateX(60deg) translateY(0);
+  }
+
+  100% {
+    transform: rotateX(60deg) translateY(60px);
+  }
+}
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    header img {
+      display: block;
+      margin: 0 auto;
+      max-width: 700px;
+      width: 100%;
+      height: auto;
+    }
+
+    p {
+      color: #FFFFFF;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      text-shadow: 0 0 5px #00f0ff;
+      margin-top: 0.5rem;
+    }
+
+    /* Museum Gallery Grid */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+      gap: 3rem;
+      padding: 2rem 5vw;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* CRT Monitor / Frame Style */
+    .card {
+      background: #100b21;
+      border: 3px solid #39ff88;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow:
+        0 0 15px rgba(57, 255, 136, 0.4),
+        inset 0 0 15px rgba(57, 255, 136, 0.2);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        rgba(255,255,255,0.03) 50%,
+        rgba(0,0,0,0.2) 50%
+      );
+      background-size: 100% 4px;
+      pointer-events: none;
+      border-radius: 12px;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) scale(1.03);
+    }
+
+    /* Card Images */
+    .card img {
+      width: 100%;
+      height: auto;
+      max-height: 220px;
+      object-fit: contain;
+      border-radius: 10px;
+      filter: contrast(1.2) saturate(1.1);
+      transition: filter 0.3s ease;
+    }
+
+    .card:hover img {
+      filter: contrast(1.4) saturate(1.5);
+    }
+    .card.cartoons:hover {
+  border-color: #00f0ff;
+  box-shadow:
+    0 0 25px rgba(0, 240, 255, 0.6),
+    inset 0 0 25px rgba(0, 240, 255, 0.3);
+}
+
+.card.toys:hover {
+  border-color: #ff00a6;
+  box-shadow:
+    0 0 25px rgba(255, 0, 166, 0.6),
+    inset 0 0 25px rgba(255, 0, 166, 0.3);
+}
+
+.card.comics:hover {
+  border-color: #ffe600;
+  box-shadow:
+    0 0 25px rgba(255, 230, 0, 0.6),
+    inset 0 0 25px rgba(255, 230, 0, 0.3);
+}
+    .card.video:hover {
+  border-color: #39ff14;
+  box-shadow:
+    0 0 25px rgba(102, 255, 0, 0.6),
+    inset 0 0 25px rgba(102, 255, 0, 0.3);
+}
+.card.movies:hover {
+  border-color: #7f00ff;
+  box-shadow:
+    0 0 25px rgba(127, 0, 255, 0.6),
+    inset 0 0 25px rgba(127, 0, 255, 0.3);
+}
+    /* Image Title */
+    .card h3 {
+      color: #39ff88;
+      text-shadow: 0 0 5px #39ff88;
+      margin: 1.5rem 0 0.5rem;
+      text-align: center;
+    }
+
+    .card p {
+      color: #39ff88;
+      font-size: 0.8rem;
+      text-align: center;
+      margin: 12px 0 0 0;
+      text-shadow: none;
+    }
+
+    .card.cartoons p {
+  color: #00f0ff;
+}
+
+.card.toys p {
+  color: #ff00a6;
+}
+
+.card.comics p {
+  color: #ffe600;
+}
+
+.card.video p {
+  color: #66ff00;
+}
+
+.card.movies p {
+  color: #7f00ff;
+}
+footer {
+  text-align: center;
+  padding: 3rem 2rem 2rem;
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  max-width: 1000px;
+  margin: 0 auto;
+  opacity: 0.8;
+}
+
+footer p {
+  color: #FFFFFF;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-shadow: none;
+}
+   .contact-link {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 2px solid #39FF88;
+  border-radius: 8px;
+  color: #ffffff;
+  background: rgba(57, 255, 136, 0.55);
+  text-decoration: none;
+  text-shadow: 0 0 8px #000000;
+  box-shadow: 0 0 10px rgba(57,255,136,0.4);
+  transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+  background: rgba(57,255,136,0.35);
+  color: #39ff88;
+  border-color: #39ff88;
+  box-shadow: 0 0 15px rgba(57,255,136,0.6);
+}
+
+       .search-link {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 2px solid #39FF88;
+  border-radius: 8px;
+  color: #ffffff;
+  background: rgba(57, 255, 136, 0.55);
+  text-decoration: none;
+  text-shadow: 0 0 8px #000000;
+  box-shadow: 0 0 10px rgba(57,255,136,0.4);
+  transition: all 0.3s ease;
+}
+
+.search-link:hover {
+  background: rgba(57,255,136,0.35);
+  color: #39ff88;
+  border-color: #39ff88;
+  box-shadow: 0 0 15px rgba(57,255,136,0.6);
+}
+
+.about-link {
+  display: inline-block;
+  padding: 12px 24px;
+  border: 2px solid #39FF88;
+  border-radius: 8px;
+  color: #ffffff;
+  background: rgba(57, 255, 136, 0.55);
+  text-decoration: none;
+  text-shadow: 0 0 8px #000000;
+  box-shadow: 0 0 10px rgba(57,255,136,0.4);
+  transition: all 0.3s ease;
+}
+
+.about-link:hover {
+  background: rgba(57,255,136,0.35);
+  color: #39ff88;
+  border-color: #39ff88;
+  box-shadow: 0 0 15px rgba(57,255,136,0.6);
+}
+.footer-links {
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+
+  border: 2px solid #39FF88;
+  border-radius: 10px;
+
+  background: rgba(57, 255, 136, 0.15);
+  box-shadow: 0 0 12px rgba(57,255,136,0.25);
+
+  overflow: hidden;
+}
+.footer-links a {
+  flex: 1;
+  min-width: 140px;
+
+  text-align: center;
+  padding: 12px 24px;
+
+  color: #fff;
+  text-decoration: none;
+
+  background: transparent; /* IMPORTANT */
+  text-shadow: 0 0 8px #000;
+
+  transition: all 0.25s ease;
+}
+.footer-links a {
+  position: relative;
+  z-index: 1;
+}
+.footer-links a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(57,255,136,0.0);
+  transition: all 0.25s ease;
+  z-index: -1;
+}
+.footer-links a:hover::before {
+  background: rgba(57,255,136,0.25);
+  box-shadow: inset 0 0 15px rgba(57,255,136,0.35);
+}
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Animated Synthwave Grid -->
+  <div class="grid-container">
+    <div class="grid"></div>
+  </div>
+
+  <!-- Page Header -->
+  <header>
+
+    <img src="A84 Logo.png" alt="Cartoon Logo Database Logo">
+
+    <p>
+      A Museum of Logos That Defined An 80s Childhood
+    </p>
+
+  </header>
+
+  <!-- Image Gallery -->
+  <div class="gallery">
+
+    <!-- Card 1 -->
+    <a class="card cartoons" href="cartoons.html">
+
+      <img src="Asteroid84 CARTOONS.png" alt="Cartoons">
+
+      <p>Saturday Mornings and Weekdays After School</p>
+
+    </a>
+
+    <!-- Card 2 -->
+    <a class="card toys" href="toys.html">
+
+      <img src="Asteroid84 TOYS.png" alt="toys.html">
+
+      <p>That Wonderful Plastic We Still Collect</p>
+
+    </a>
+
+    <!-- Card 3 -->
+    <a class="card comics" href="comics.html">
+
+      <img src="Asteroid84 COMICS.png" alt="Comics">
+
+      <p>The Smell Of Newsprint & The Magic Of 4 Color Process</p>
+
+    </a>
+    <!-- Card 4 -->
+    <a class="card video" href="video games.html">
+
+      <img src="Asteroid84 VIDEO.png" alt="Video Games">
+
+      <p>Days Spent Trying To Beat One Level</p>
+
+    </a>
+
+        <!-- Card 5 -->
+    <a class="card movies" href="Movies&TV.html">
+
+      <img src="Asteroid84 MOVIES2.png" alt="Movies & TV">
+
+      <p>Where We Spent Most Of Our Childhoods</p>
+
+    </a>
+  </div>
+
+ <footer>
+ <div class="footer-links">
+  <a href="Contact.html" class="contact-link">CONTACT US</a>
+  <a href="Search.html" class="search-link">SEARCH</a>
+  <a href="About.html" class="about-link">ABOUT</a>
+</div>
+  <p>
+    The Asteroid 84 Logo Database is a non-commercial archival project dedicated to preserving and documenting the graphic design history of classic cartoons, toys, comics, and related media. All recreated logos and associated properties remain the copyrights and trademarks of their respective artists, creators, studios, publishers, and rights holders. This archive exists solely for historical, educational, and reference purposes.
+  </p>
+</footer>
+</body>
+</html>

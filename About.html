@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WHY THIS ARCHIVE EXISTS</title>
+
+<style>
+
+@font-face {
+  font-family: 'IBMDOS';
+  src: url('../FONTS/IBM_DOS_ISO8.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 60px 20px;
+  font-family: 'IBMDOS', monospace;
+  background: #000;
+  color: #39ff88;
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 3px rgba(0, 255, 102, 0.8),
+    0 0 6px rgba(0, 255, 102, 0.4);
+}
+
+/* background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)),
+    url("../IMAGES/starfield.png") center/cover no-repeat;
+  z-index: -2;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(57,255,136,0.15) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(57,255,136,0.15) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* logo */
+.site-logo-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+}
+
+.site-logo img {
+  width: 60px;
+  height: auto;
+}
+
+/* content block */
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 0.75rem;
+  line-height: 1.8;
+}
+
+/* headings */
+h1 {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  letter-spacing: 3px;
+}
+
+p {
+  margin-bottom: 18px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="site-logo-container">
+  <a href="../index.html" class="site-logo">
+    <img src="../IMAGES/A84SmallLogo.png" alt="Site Logo">
+  </a>
+</div>
+
+<div class="content">
+
+<h1>WHY THIS ARCHIVE EXISTS</h1>
+
+
+<p>
+I'm sure you read the disclaimer that we drop on each page, but it IS a bit clinical, so I'll give you my take on this site.
+</p>
+
+<p>
+I grew up in the 1980s which, as anyone who was there knows, was a decade more rich in entertainment for kids as there has ever been, 
+  and probably ever will be again. As a graphic designer and artist from my wee years, my first love of art was cartoons, action figures, 
+  and comic books, and the things that initially drew me to buy any particular one were the logos. Those perfect artistic renderings that
+  supplied me with the answer to every question about what I was about to watch, play with, or read. The logos funneled everything awesome 
+  about the IP into a single graphic that pulled you into their story; into their world. Much like the 'friend who introduced you to your 
+  future wife', those logos introduced me to characters, stories, and worlds that I would love my entire life. This love became the impetus 
+  for this website and the reason I spend hours painstakingly recreating each logo. I wanted to show those wonderful pieces of art the appreciation and love they deserve.
+</p>
+
+</div>
+
+</body>
+</html>

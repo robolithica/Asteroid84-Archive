@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Asteroid 84 Search</title>
+
+<style>
+@font-face {
+    font-family: 'IBMDOS';
+    src: url('FONTS/IBM_DOS_ISO8.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #03001e;
+    font-family: 'IBMDOS', monospace;
+    color: #39ff88;
+    overflow-x: hidden;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+}
+
+header p {
+    color: #FFFFFF;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    margin-top: 1rem;
+}
+
+/* Search Box */
+.search-container {
+    max-width: 700px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: #100b21;
+    border: 3px solid #39ff88;
+    border-radius: 15px;
+    box-shadow:
+        0 0 15px rgba(239, 7, 194, 0.4),
+        inset 0 0 15px rgba(239, 7, 194, 0.2);
+}
+
+.search-container input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    background: #03001e;
+    border: 2px solid #39ff88;
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: 'IBMDOS', monospace;
+    font-size: 1rem;
+}
+
+.search-container input:focus {
+    outline: none;
+    border-color: #00f0ff;
+    box-shadow: 0 0 10px rgba(0,240,255,0.5);
+}
+
+#results {
+    margin-top: 2rem;
+}
+
+.result-item {
+    display: block;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: rgba(3, 0, 30, 0.8);
+    border: 2px solid #39ff88;
+    border-radius: 6px;
+    color: #39ff88;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.result-item:hover {
+    color: #00f0ff;
+    border-color: #00f0ff;
+    box-shadow: 0 0 15px rgba(0,240,255,0.6);
+}
+
+.no-results {
+    color: #FFFFFF;
+    margin-top: 1rem;
+}
+
+.results-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.results-list li {
+    margin-bottom: 10px;
+    border: 2px solid #39ff88;
+    border-radius: 6px;
+    background: rgba(3, 0, 30, 0.8);
+    transition: all 0.3s ease;
+}
+
+.results-list li a {
+    display: block;
+    padding: 12px;
+    color: #39ff88;
+    text-decoration: none;
+    font-family: 'IBMDOS', monospace;
+}
+
+.results-list li:hover {
+    border-color: #00f0ff;
+    box-shadow: 0 0 15px rgba(0,240,255,0.6);
+}
+
+.results-list li a:hover {
+    color: #00f0ff;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 3rem 2rem 2rem;
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    max-width: 1000px;
+    margin: 0 auto;
+    opacity: 0.8;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <p>Search the Archive<br>Find your favorite 80s franchises.</p>
+</header>
+
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="SEARCH..." autocomplete="off">
+
+    <div id="results"></div>
+</div>
+
+<footer>
+    The Asteroid 84 Logo Database is a non-commercial archival project dedicated to preserving and documenting the graphic design history of classic cartoons, toys, comics, and related media. All recreated logos and associated properties remain the copyrights and trademarks of their respective artists, creators, studios, publishers, and rights holders. This archive exists solely for historical, educational, and reference purposes.
+</footer>
+
+<script src="search-data.js"></script>
+
+<script src="search-data.js"></script>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
+const searchInput = document.getElementById('searchInput');
+const resultsDiv = document.getElementById('results');
+
+if (!searchInput || !resultsDiv || typeof pages === "undefined") {
+    console.log("Search setup failed: missing elements or data");
+    return;
+}
+
+searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase().trim();
+
+    resultsDiv.innerHTML = '';
+
+    if (query === '') return;
+
+    const matches = pages.filter(page =>
+        page.title.toLowerCase().includes(query) ||
+        (page.keywords && page.keywords.toLowerCase().includes(query))
+    );
+
+    if (matches.length === 0) {
+        resultsDiv.innerHTML = '<p class="no-results">NO MATCHES FOUND.</p>';
+        return;
+    }
+
+    const ul = document.createElement('ul');
+ul.className = 'results-list';
+
+matches.forEach(page => {
+    const li = document.createElement('li');
+
+    const link = document.createElement('a');
+    link.href = page.url;
+    link.textContent = page.title;
+
+    li.appendChild(link);
+    ul.appendChild(li);
+});
+
+resultsDiv.appendChild(ul);
+});
+
+});
+</script>
+
+</body>
+</html>

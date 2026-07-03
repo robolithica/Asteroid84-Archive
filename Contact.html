@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asteroid 84 Contact</title>
+
+  <style>
+@font-face {
+    font-family: 'IBMDOS';
+
+    src: url('FONTS/IBM_DOS_ISO8.woff2') format('woff2');
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #03001e;
+      font-family: 'IBMDOS', monospace;
+      color: #39ff88;;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      padding: 3rem 1rem 2rem;
+    }
+
+    header img {
+      display: block;
+      margin: 0 auto;
+      max-width: 300px;
+      width: 100%;
+      height: auto;
+    }
+
+    header p {
+      color: #FFFFFF;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-top: 1rem;
+    }
+
+  .contact-form {
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: #100b21;
+  border: 3px solid #39ff88;
+  border-radius: 15px;
+  box-shadow:
+    0 0 15px rgba(239, 7, 194, 0.4),
+    inset 0 0 15px rgba(239, 7, 194, 0.2);
+}
+
+.contact-form label {
+  display: block;
+  margin: 1rem 0 0.5rem;
+  color: #39ff88;
+  text-shadow: 0 0 5px #39ff88;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px;
+  background: #03001e;
+  border: 2px solid #39ff88;
+  border-radius: 6px;
+  color: #ffffff;
+  font-family: 'IBMDOS', monospace;
+  font-size: 1rem;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #00f0ff;
+  box-shadow: 0 0 10px rgba(0,240,255,0.5);
+}
+
+.contact-form button {
+  margin-top: 1.5rem;
+  padding: 12px 24px;
+  background: transparent;
+  border: 2px solid #39ff88;
+  border-radius: 6px;
+  color: #39ff88;
+  font-family: 'IBMDOS', monospace;
+  font-size: 1rem;
+  cursor: pointer;
+  text-shadow: 0 0 5px #39ff88;
+  transition: all 0.3s ease;
+}
+
+.contact-form button:hover {
+  border-color: #00f0ff;
+  color: #00f0ff;
+  box-shadow: 0 0 15px rgba(0,240,255,0.6);
+}
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem 2rem;
+      color: #FFFFFF;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      max-width: 1000px;
+      margin: 0 auto;
+      opacity: 0.8;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Animated Grid -->
+  <div class="grid-container">
+    <div class="grid"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+
+<p>Contact<br>Don't forget to let us know your favorite 80s cartoon!</p>
+
+  </header>
+
+<form action="https://formspree.io/f/xqejoovv" method="POST" class="contact-form">
+
+  <label for="name">Name</label>
+
+  <input type="text" id="name" name="name" required>
+
+  <label for="email">Email</label>
+
+  <input type="email" id="email" name="email" required>
+
+  <label for="message">Message</label>
+
+  <textarea id="message" name="message" rows="8" required></textarea>
+
+  <button type="submit">SEND MESSAGE</button>
+</form>
+  <!-- Footer -->
+  <footer>
+
+    The Asteroid 84 Logo Database is a non-commercial archival project dedicated to preserving and documenting the graphic design history of classic cartoons, toys, comics, and related media. All recreated logos and associated properties remain the copyrights and trademarks of their respective artists, creators, studios, publishers, and rights holders. This archive exists solely for historical, educational, and reference purposes.
+
+  </footer>
+
+</body>
+</html>
