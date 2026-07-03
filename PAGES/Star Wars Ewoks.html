@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Star Wars: Ewoks</title>
+
+<style>
+
+   @font-face {
+    font-family: 'IBMDOS';
+
+    src: url('../FONTS/IBM_DOS_ISO8.woff2') format('woff2');
+
+    font-weight: normal;
+    font-style: normal;
+}
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+  body {
+    font-family: 'IBMDOS', monospaced;
+    background-color: #000;
+    color: #39ff88;
+     letter-spacing: 1px;
+     text-shadow:
+        0 0 3px rgba(0, 255, 102, 0.9),
+        0 0 6px rgba(0, 255, 102, 0.6),
+        0 0 10px rgba(0, 255, 102, 0.35);
+    overflow-x: hidden;
+    position: relative;
+}
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    background:
+        linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)),
+        url("../IMAGES/starfield.png") center center / cover no-repeat;
+
+    background-attachment: fixed;
+
+    z-index: -2;
+}
+body::after {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    /* grid lines */
+    background-image:
+        linear-gradient(to right, rgba(57, 255, 136, 0.25) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(57, 255, 136, 0.25) 1px, transparent 1px);
+
+    background-size: 60px 60px;
+
+    /* fade from top to bottom */
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1), rgba(0,0,0,0));
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+    .page-header {
+        text-align: center;
+       margin-top: 40px;
+        margin-bottom: 60px;
+    }
+
+    .page-title {
+        font-size: clamp(0.75rem, 2.5vw, 5rem);
+        color: inherit;
+        letter-spacing: 4px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+
+        
+    }
+
+ .floating-nav {
+  position: fixed;
+  top: 35px;
+  right: 35px;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.nav-btn img {
+  width: 90px;
+  height: auto;
+  display: block;
+
+  cursor: pointer;
+
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+   
+@media (max-width: 700px) {
+
+  .floating-nav {
+    top: 0;
+    right: 0;
+    left: 0;
+
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    padding: 10px;
+    gap: 10px;
+
+    background: transparent;
+    backdrop-filter: blur(6px);
+  }
+
+  .nav-btn img {
+    width: 60px; /* smaller buttons for mobile */
+     transform: scale(0.90);
+  } 
+} /* end of media */
+.nav-btn img:hover {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 8px var(--glow));
+}
+
+.nav-btn img:active {
+  transform: scale(0.98);
+}
+
+    .page-info {
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.7;
+        color: inherit;
+        font-size: .75rem;
+    }
+
+    .gallery {
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: center;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    max-width: 1800px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    flex: 0 1 calc(16.666% - 12px);
+
+    max-width: 280px;
+
+    text-align: center;
+   position: relative;
+overflow: visible;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+
+    display: block;
+
+    border: 2px solid rgba(57, 255, 136, 0.5);
+}
+   .gallery-item::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        rgba(255,255,255,0.03) 50%,
+        rgba(0,0,0,0.2) 50%
+      );
+      background-size: 100% 4px;
+      pointer-events: none;
+      border-radius: 12px;
+    }
+
+   .intro-text {
+      margin-bottom: 1.5rem;
+   }
+    .gallery-item img:hover {
+        transform: scale(1.01);
+
+        box-shadow:
+            0 0 20px rgba(57, 255, 136, 0.6),
+            0 0 40px rgba(57, 255, 136, 0.25);
+    }
+
+    .caption {
+        margin-top: 14px;
+        color: #39ff88;
+       text-shadow: none;
+        font-size: 0.55rem;
+        letter-spacing: 1px;
+    }
+  
+   
+      .site-logo-container {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 10000;
+    padding-bottom: 20px;
+}
+.site-logo img {
+    width: 55px;
+    height: auto;
+    display: block;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        filter 0.15s ease;
+}
+   .site-logo img:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0 0 8px rgba(57, 255, 136, 0.8));
+}
+
+.site-logo-container:hover .logo-dropdown {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateX(-50%) translateY(0);
+
+    pointer-events: auto;
+}
+/* DROPDOWN MENU */
+
+.logo-dropdown {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform: translateX(-50%) translateY(-10px);
+
+    pointer-events: none;
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease;
+}
+    
+
+/* SHOW ON HOVER */
+
+.site-logo-container:hover .logo-dropdown {
+    opacity: 1;
+    visibility: visible;
+
+    transform: translateX(-50%) translateY(0);
+   pointer-events: auto;
+}
+
+.logo-dropdown img {
+    width: 80px;
+    height: auto;
+    display: block;
+
+    transition:
+        transform 0.15s ease,
+        filter 0.15s ease;
+}
+
+.logo-dropdown img:hover {
+    transform: scale(1.05);
+
+    filter:
+        drop-shadow(0 0 8px var(--glow));
+}
+
+    @media (max-width: 768px) {
+        body::before {
+            background-size: 35px 35px;
+        }
+
+        .container {
+            padding-top: 40px;
+        }
+ 
+        .site-logo {
+        top: 20px;
+        left: 20px;
+    }
+   
+@media (max-width: 900px) {
+
+    .gallery-item {
+        flex: 0 1 calc(33.333% - 12px);
+    }
+}
+
+@media (max-width: 600px) {
+
+    .gallery-item {
+        flex: 0 1 calc(50% - 12px);
+    }
+}    
+    
+}
+   .footer {
+      text-align: center;
+           }
+    .rating-tooltip {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+
+    width: 260px;
+    padding: 12px;
+
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid #39ff88;
+
+    font-size: 0.65rem;
+    line-height: 1.5;
+    white-space: pre-line;
+
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.franchise-rating:hover .rating-tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+</style>
+</head>
+
+<body>
+<div class="site-logo-container">
+
+    <a href="../index.html" class="site-logo">
+        <img src="../IMAGES/A84SmallLogo.png" alt="Site Logo">
+    </a>
+
+    <div class="logo-dropdown">
+
+        <a href="../cartoons.html" style="--glow: rgba(7, 81, 234, 0.8)">
+            <img src="../IMAGES/CARTOONSNavButton.png" alt="Cartoons">
+        </a>
+
+        <a href="../toys.html" style="--glow: rgba(255, 0, 127, 0.8)">
+            <img src="../IMAGES/TOYSNavButton.png" alt="Toys">
+        </a>
+
+        <a href="../comics.html"style="--glow: rgba(236, 247, 11, 0.8)">
+            <img src="../IMAGES/COMICSNavButton.png" alt="Comics">
+        </a>
+
+    </div>
+
+</div>
+
+   <div class="container">
+
+    <header class="page-header">
+        <h1 class="page-title">Star Wars: Ewoks</h1>
+
+       <p class="page-info intro-text">
+            Ewoks info
+           </p>
+       <a class="page-info">
+            Original Release: Sep 7, 1985
+           </a>
+       &ensp;
+       <a class="page-info">
+            Episode Total: 26<br>
+         Action Figure Total: <br>
+         Issue Total:
+       </a>
+       <p class="page-info">
+            Studios: Nelvana/Lucasfilm<br>
+         Toy Manufacturer: Kenner<br>
+         Comic Publisher: Star Comics
+       </p>
+<p class="page-info">
+        <a class="page-info" href="https://en.wikipedia.org/wiki/Star_Wars:_Ewoks" 
+
+target="_blank">
+            Ewoks - Wiki
+       </a>
+&ensp;
+
+        <a class="page-info" 
+
+href="https://tvtropes.org/pmwiki/pmwiki.php/WesternAnimation/Ewoks" target="blank">
+            Ewoks - TVTropes
+       </a>
+       </p>
+    </header>
+
+   
+
+    <section class="gallery">
+
+        <div class="gallery-item">
+            <img src="../IMAGES/EWK-CL1.png"
+  data-full="../IMAGES/EWK-CL1.png"
+  alt="Ewoks Cartoon & Toy Logo1">
+           <div class="caption">Primary Cartoon & Toy Logo</div>
+        </div>
+      <div class="gallery-item">
+            <img src="../IMAGES/EWK-BL1.png"
+  data-full="../IMAGES/EWB-TL1.png"
+  alt="Ewoks Comic Book Logo1">
+           <div class="caption">Primary Comic Book Logo</div>
+        </div>
+               
+    </section>
+
+</div>
+
+<!-- LIGHTBOX MODAL -->
+<div class="lightbox" id="lightbox">
+
+  <span class="lightbox-close">&times;</span>
+
+  <img class="lightbox-content" id="lightbox-img">
+
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+
+</div>
+
+<style>
+
+/* LIGHTBOX */
+
+.lightbox {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.92);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+
+    z-index: 99999;
+
+    padding: 40px;
+}
+
+.lightbox.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 82vh;
+
+    border: 2px solid rgba(57, 255, 136, 0.7);
+
+    box-shadow:
+        0 0 25px rgba(57, 255, 136, 0.5),
+        0 0 60px rgba(57, 255, 136, 0.2);
+
+    animation: lightboxZoom 0.25s ease;
+}
+
+.lightbox-caption {
+    margin-top: 20px;
+
+    color: #cccccc;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+
+    font-size: 3rem;
+    color: #39ff88;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        text-shadow 0.15s ease;
+}
+
+.lightbox-close:hover {
+    transform: scale(1.1);
+
+    text-shadow:
+        0 0 10px rgba(0, 240, 255, 0.8),
+        0 0 25px rgba(0, 240, 255, 0.5);
+}
+
+.gallery-item img {
+    cursor: pointer;
+}
+
+@keyframes lightboxZoom {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .lightbox {
+        padding: 20px;
+    }
+
+    .lightbox-close {
+        top: 10px;
+        right: 20px;
+        font-size: 2.5rem;
+    }
+
+    .lightbox-content {
+        max-width: 100%;
+    }
+}
+
+</style>
+
+<script>
+
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
+const lightboxCaption = document.getElementById("lightbox-caption");
+const galleryImages = document.querySelectorAll(".gallery-item img");
+const closeBtn = document.querySelector(".lightbox-close");
+
+galleryImages.forEach(img => {
+
+    img.addEventListener("click", () => {
+
+        lightbox.classList.add("active");
+
+        lightboxImg.src = img.dataset.full || img.src;
+
+        lightboxCaption.textContent = img.alt;
+
+        document.body.style.overflow = "hidden";
+    });
+});
+
+function closeLightbox() {
+
+    lightbox.classList.remove("active");
+
+    document.body.style.overflow = "";
+}
+
+closeBtn.addEventListener("click", closeLightbox);
+
+lightbox.addEventListener("click", (e) => {
+
+    if (e.target === lightbox) {
+        closeLightbox();
+    }
+});
+
+document.addEventListener("keydown", (e) => {
+
+    if (e.key === "Escape") {
+        closeLightbox();
+    }
+});
+
+</script>
+<script>
+   document.addEventListener("DOMContentLoaded", () => {
+
+    const writing = 2;
+    const visuals = 5;
+    const characters = 2;
+    const music = 4;
+    const nostalgia = 3;
+
+    const overall =
+        (writing * 0.35 +
+        visuals * 0.30 +
+        characters * 0.20 +
+        music * 0.15 +
+        nostalgia * 0.10);
+
+    const formatted = overall.toFixed(1);
+
+    document.getElementById("overall-score").textContent = formatted + "/10";
+    document.getElementById("tooltip-overall").textContent = formatted;
+});
+</script>
+<footer class="page footer">
+   <div class="page-info" style="margin-top: 40px; font-size: 0.6rem; text-shadow: none; color: #39ff88;">
+    All site design, presentation, and logo images are created by the site owner. Logo images are fan-made recreations
+      and visual interpretations based on existing properties. All characters, logos, and source materials
+      remain the property of their respective rights holders. This site is an unofficial, non-commercial
+      fan/reference project and is not affiliated with or endorsed by any rights holders.
+</div> </footer>
+   <script>
+document.addEventListener("contextmenu", function(e) {
+    e.preventDefault();
+});
+</script>
+</body>
+</html>
